@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 6294da3f7eea8ab44b6df5fb735c45af
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - star: {instanceID: 0}
+  - whiteStar: {fileID: 1868213911133024, guid: b632d9c9cca604a428f43fa837b84917,
+      type: 2}
+  - pinkStar: {fileID: 1070268581860706, guid: d92775ec6cd873a419be88b5069c6bef, type: 2}
+  - purpleStar: {fileID: 1766995955023098, guid: 26e0c054e6e5d2a42a04195980afd20b,
+      type: 2}
+  - starsParent: {instanceID: 0}
+  - newStar: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

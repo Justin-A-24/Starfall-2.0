@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Meteor
+  - Star
+  - Player Camera
+  - Asteroid
+  - Comet
+  - Black Hole
+  - Background
+  - Endpoint
+  - Startpoint
+  - Main Menu
+  - Loading Canvas
+  - Main Menu Canvas
+  - Stars Parent
+  - Pause Menu
+  - Pause Panel
+  - Timer Bar
+  - Wall
+  - Died Menu
+  - UITrigger
+  - CubeTrigger
+  - FireParticles
+  - IceParticles
+  - JetPackparticles
+  - Meteors Parent
+  - Comets Parent
+  - Asteroids Parent
+  - FlameShuttle
+  - Border
+  - Fader
+  - Death Sound
+  - SFX Player
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Gameplay
+  - Background
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1669680127
+    locked: 0
+  - name: Gameplay
+    uniqueID: 2092040613
+    locked: 0
+  - name: Player
+    uniqueID: 3609499675
+    locked: 0
