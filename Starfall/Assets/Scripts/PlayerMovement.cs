@@ -148,13 +148,14 @@ public class PlayerMovement : MonoBehaviour
             jetPackParticles.Clear();
             jetPackParticles.Play();
             playerBody.gravityScale = 0.5f;
-            canLand = false;
+            canLand = true;
             onStar = false;
             onComet = false;
             onMeteor = false;
             //playerBody.velocity = Vector2.up * jumpForce;
             //jumpsRemaining--;
             falling = false;
+            Debug.Log(playerBody.gravityScale);
         }
     }
 
@@ -165,7 +166,7 @@ public class PlayerMovement : MonoBehaviour
 			currentStar = star;
 			onStar = true;
 			RefillFuel();
-			HandleMovements();
+            HandleMovements();
 		}
 	}
 	// move player position with star position
