@@ -48,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
 	public bool onMeteor;
 	public GameObject mainCamera;
 	public AudioSource bgPlayer;
+    public bool AlternateMovement;
 	//public AudioClip explosionSound;
 
 
@@ -138,7 +139,26 @@ public class PlayerMovement : MonoBehaviour
 			PlayerDies();
 	}
 
-	private void LandOnStar(GameObject star)
+    //Alternate movement bool
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (AlternateMovement == true && other.gameObject.tag == "Star")
+        {
+            gameplaySound.PlayJetpack();
+            jetPackParticles.Clear();
+            jetPackParticles.Play();
+            playerBody.gravityScale = 0.5f;
+            canLand = false;
+            onStar = false;
+            onComet = false;
+            onMeteor = false;
+            //playerBody.velocity = Vector2.up * jumpForce;
+            //jumpsRemaining--;
+            falling = false;
+        }
+    }
+
+    private void LandOnStar(GameObject star)
 	{
 		if(canLand && !onStar)
 		{
@@ -156,10 +176,24 @@ public class PlayerMovement : MonoBehaviour
 		//if(movingToCenter == false)
 		playerBody.gravityScale = 0;
 		Vector3 colliderPosition;
-		CircleCollider2D currentCollider;
-		currentCollider = currentStar.GetComponent<CircleCollider2D>();
-		colliderPosition = new Vector3(currentCollider.offset.x + currentStar.transform.position.x, currentCollider.offset.y + currentStar.transform.position.y, 0f);
-		transform.position = colliderPosition;
+	    Vector3 colliderPositionY;
+        CircleCollider2D currentCollider;
+	    currentCollider = currentStar.GetComponent<CircleCollider2D>();
+        //Only if desire "platform star" then alternate movement be true
+        if (AlternateMovement == false)
+	    {
+	        colliderPosition = new Vector3(currentCollider.offset.x + currentStar.transform.position.x, currentCollider.offset.y + currentStar.transform.position.y, 0f);
+	        transform.position = colliderPosition;
+        }
+        else if (AlternateMovement == true)
+        {
+            colliderPosition = new Vector3(transform.position.x, currentCollider.offset.y + currentStar.transform.position.y, 0f);
+            transform.position = colliderPosition;
+        }
+        else
+        {
+            Debug.Log("You should not be seeing this, Alternate Movement bool need attention; in MoveWithStar function");
+        }
 	}
 
 	private void MoveTowardCenter()
