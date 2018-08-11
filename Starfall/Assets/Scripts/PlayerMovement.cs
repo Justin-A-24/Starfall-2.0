@@ -48,7 +48,10 @@ public class PlayerMovement : MonoBehaviour
 	public bool onMeteor;
 	public GameObject mainCamera;
 	public AudioSource bgPlayer;
+    public bool haveNotJumpSameStar = true;
     public bool AlternateMovement;
+    public float speedOnStar = 0.1f;
+    private float speedSave;
 	//public AudioClip explosionSound;
 
 
@@ -60,7 +63,9 @@ public class PlayerMovement : MonoBehaviour
 		player = GameObject.FindWithTag("Player");
 		playerBody = player.GetComponent<Rigidbody2D>();
 		playerRenderer = player.GetComponent<SpriteRenderer>();
-		myAnim = player.GetComponent<Animator>();
+        //Keeping storage of gameObject "star"
+        //Need to get script from star "SingleJumpFromStar"
+        myAnim = player.GetComponent<Animator>();
 		levelStartPos = GameObject.FindWithTag("Startpoint").transform.position.x;
 		levelEndPos = GameObject.FindWithTag("Endpoint").transform.position.x;
 		jumpsRemaining = maxJumps;
@@ -79,7 +84,9 @@ public class PlayerMovement : MonoBehaviour
 		jetPackParticles.Stop();
 		jetPackParticles.Clear();
 		gameplaySound = GameObject.FindWithTag("SFX Player").GetComponent<SoundEffectsScript>();
-	}
+        //To save the custom speed in inspector
+	    speedSave = speed;
+    }
 	
 	void FixedUpdate()
 	{
@@ -114,10 +121,24 @@ public class PlayerMovement : MonoBehaviour
 		transform.localScale = Scaler;
 	}
 
+    //When player enter trigger object
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.GetComponent<SingleJumpFromStar>().jumpable)
+        {
+            haveNotJumpSameStar = true;
+        }
+        //To stop all movement upon entry
+        if (AlternateMovement)
+        {
+            playerBody.velocity = Vector3.zero;
+        }
+    }
+
 	private void OnTriggerStay2D(Collider2D other)
 	{
 		// set current star player is riding on
-		if(other.gameObject.CompareTag("Star"))
+		if(other.gameObject.CompareTag("Star") && haveNotJumpSameStar)
 			LandOnStar(other.gameObject);
 		/*if(other.gameObject.CompareTag("Comet"))
 			LandOnComet(other.gameObject);*/
@@ -142,20 +163,22 @@ public class PlayerMovement : MonoBehaviour
     //Alternate movement bool
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (AlternateMovement == true && other.gameObject.tag == "Star")
+        if (AlternateMovement && (other.gameObject.tag == "Star" || other.gameObject.tag == "Comet"))
         {
+            playerBody.gravityScale = 0.5f;
             gameplaySound.PlayJetpack();
             jetPackParticles.Clear();
             jetPackParticles.Play();
-            playerBody.gravityScale = 0.5f;
+            //playerBody.gravityScale = 0.5f;
+            //Copy from Handle Input function
             canLand = true;
             onStar = false;
             onComet = false;
             onMeteor = false;
-            //playerBody.velocity = Vector2.up * jumpForce;
             //jumpsRemaining--;
             falling = false;
-            Debug.Log(playerBody.gravityScale);
+            //Restore player speed
+            speed = speedSave;
         }
     }
 
@@ -177,7 +200,6 @@ public class PlayerMovement : MonoBehaviour
 		//if(movingToCenter == false)
 		playerBody.gravityScale = 0;
 		Vector3 colliderPosition;
-	    Vector3 colliderPositionY;
         CircleCollider2D currentCollider;
 	    currentCollider = currentStar.GetComponent<CircleCollider2D>();
         //Only if desire "platform star" then alternate movement be true
@@ -186,10 +208,12 @@ public class PlayerMovement : MonoBehaviour
 	        colliderPosition = new Vector3(currentCollider.offset.x + currentStar.transform.position.x, currentCollider.offset.y + currentStar.transform.position.y, 0f);
 	        transform.position = colliderPosition;
         }
-        else if (AlternateMovement == true)
+        else if (AlternateMovement)
         {
-            colliderPosition = new Vector3(transform.position.x, currentCollider.offset.y + currentStar.transform.position.y, 0f);
+            //colliderPosition = new Vector3(transform.position.x, currentCollider.offset.y + currentStar.transform.position.y, 0f);
+            colliderPosition = new Vector3(transform.position.x, transform.position.y, 0f);
             transform.position = colliderPosition;
+            speed = speedOnStar;
         }
         else
         {
@@ -214,18 +238,18 @@ public class PlayerMovement : MonoBehaviour
 		// if riding a star, move player position with it
 		//if(onStar)
 		//	MoveTowardCenter();
-		if(onStar)
+		if(onStar && haveNotJumpSameStar)
 		{
 			MoveWithStar();
 			playerBody.gravityScale = 0;
 			//MoveTowardCenter();
 		}
-		/*if(onComet)
+        /*if(onComet)
 		{
 			playerBody.gravityScale = 0;
 			MoveTowardCenterOfComet();
 		}*/
-	}
+    }
 
 	private void HandleInput()
 	{
@@ -244,7 +268,9 @@ public class PlayerMovement : MonoBehaviour
 				playerBody.velocity = Vector2.up * jumpForce;
 				jumpsRemaining--;
 				falling = false;
-			}
+                //Restore movement to the player when jump from star after velocity.zero in void OnTriggerEnter2D
+			    speed = speedSave;
+            }
 			else if(Input.GetKeyUp(KeyCode.Space))
 			{
 				jetPackParticles.Stop();
