@@ -124,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
     //When player enter trigger object
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<SingleJumpFromStar>().jumpable)
+        if (other.gameObject.GetComponent<SingleJumpFromStar>().starJumpable || other.gameObject.GetComponent<CometSingleJump>().cometJumpable || other.gameObject.GetComponent<MeteorSingleJump>().meteorJumpable)
         {
             haveNotJumpSameStar = true;
         }
@@ -163,7 +163,7 @@ public class PlayerMovement : MonoBehaviour
     //Alternate movement bool
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (AlternateMovement && (other.gameObject.tag == "Star" || other.gameObject.tag == "Comet"))
+        if (AlternateMovement && other.gameObject.tag == "Star")
         {
             playerBody.gravityScale = 0.5f;
             gameplaySound.PlayJetpack();
@@ -304,7 +304,7 @@ public class PlayerMovement : MonoBehaviour
 
 	public void FreezePlayer()
 	{
-		print("Player Froze");
+		//print("Player Froze");
 		
 		if(!isFrozen)
 		{

@@ -124,8 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ac63818c398bdc45a143c126b1d7b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  singleJump: 1
-  jumpable: 1
+  starSingleJump: 1
+  starJumpable: 0
   player: {fileID: 0}
 --- !u!212 &212729257857752334
 SpriteRenderer:

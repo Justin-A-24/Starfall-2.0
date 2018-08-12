@@ -2,30 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SingleJumpFromStar : MonoBehaviour
+public class MeteorSingleJump : MonoBehaviour
 {
     //For get component to the player jump ability
-    public bool starSingleJump = true;
-    public bool starJumpable;
+    public bool meteorSingleJump = true;
+    public bool meteorJumpable;
     public GameObject player;
 
-	// Use this for initialization
-	void Start ()
-	{
+    // Use this for initialization
+    void Start()
+    {
         player = GameObject.FindWithTag("Player");
         player.GetComponent<PlayerMovement>();
-	    starJumpable = true;
+        meteorJumpable = true;
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (meteorSingleJump && other.gameObject.tag == "Player" && meteorJumpable)
+        {
+            other.gameObject.GetComponent<PlayerMovement>().haveNotJumpSameStar = true;
+        }
+    }
+
     public void OnTriggerStay2D(Collider2D other)
     {
-        if (starSingleJump && other.gameObject.tag == "Player" && Input.GetKeyDown(KeyCode.Space) && starJumpable)
+        if (meteorSingleJump && other.gameObject.tag == "Player" && Input.GetKeyDown(KeyCode.Space) && meteorJumpable && player.GetComponent<PlayerMovement>().jumpsRemaining > 0)
         {
-            starJumpable = false;
+            meteorJumpable = false;
             other.gameObject.GetComponent<PlayerMovement>().haveNotJumpSameStar = false;
             other.gameObject.GetComponent<PlayerMovement>().canLand = true;
             other.gameObject.GetComponent<PlayerMovement>().onStar = false;
