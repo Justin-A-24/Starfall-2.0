@@ -169,13 +169,11 @@ public class PlayerMovement : MonoBehaviour
             gameplaySound.PlayJetpack();
             jetPackParticles.Clear();
             jetPackParticles.Play();
-            //playerBody.gravityScale = 0.5f;
             //Copy from Handle Input function
             canLand = true;
             onStar = false;
             onComet = false;
             onMeteor = false;
-            //jumpsRemaining--;
             falling = false;
             //Restore player speed
             speed = speedSave;

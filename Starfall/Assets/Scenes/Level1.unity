@@ -1082,11 +1082,6 @@ Prefab:
       value: 
       objectReference: {fileID: 1445418554386438, guid: 2c2379be3fdce17458d10c2b4b6c9a9d,
         type: 2}
-    - target: {fileID: 114971042692835258, guid: 7a7d9a2cf22098e4b96d614b9e5d5529,
-        type: 2}
-      propertyPath: AlternateMovement
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a7d9a2cf22098e4b96d614b9e5d5529, type: 2}
   m_IsPrefabAsset: 0

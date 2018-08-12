@@ -27,6 +27,10 @@ public class SingleJumpFromStar : MonoBehaviour
         {
             jumpable = false;
             other.gameObject.GetComponent<PlayerMovement>().haveNotJumpSameStar = false;
+            other.gameObject.GetComponent<PlayerMovement>().canLand = true;
+            other.gameObject.GetComponent<PlayerMovement>().onStar = false;
+            other.gameObject.GetComponent<PlayerMovement>().onComet = false;
+            other.gameObject.GetComponent<PlayerMovement>().onMeteor = false;
         }
     }
 }
