@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour 
 {
@@ -61,8 +62,15 @@ public class PlayerMovement : MonoBehaviour
 		playerRenderer = player.GetComponent<SpriteRenderer>();
 		myAnim = player.GetComponent<Animator>();
 		levelStartPos = GameObject.FindWithTag("Startpoint").transform.position.x;
-		levelEndPos = GameObject.FindWithTag("Endpoint").transform.position.x;
-		jumpsRemaining = maxJumps;
+
+
+        if (SceneManager.GetActiveScene().buildIndex != 11)
+            levelEndPos = GameObject.FindWithTag("Endpoint").transform.position.x;
+
+
+
+
+        jumpsRemaining = maxJumps;
 		canMove = true;
 		timeLeft = gameDuration;
 		pausePanel = GameObject.FindWithTag("Pause Panel");
