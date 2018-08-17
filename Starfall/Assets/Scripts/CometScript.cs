@@ -67,7 +67,7 @@ public class CometScript : MonoBehaviour
 				frozenStartTime = landingTime + timeLimit;
 				frozenEndTime = frozenStartTime + freezeDuration;
 			}
-			print("collision");
+			//print("collision");
 			//onComet = true;
 			if(Input.GetKeyDown(KeyCode.Space))
 			{
@@ -88,18 +88,22 @@ public class CometScript : MonoBehaviour
 		Vector3 colliderPosition;
 		CircleCollider2D currentCollider;
 		currentCollider = gameObject.GetComponent<CircleCollider2D>();
-		/*if(version == 2)
+        /*if(version == 2)
 			colliderPosition = new Vector3(currentCollider.offset.x+0.1f, currentCollider.offset.y+0.1f, 0f);
 		else
 			colliderPosition = new Vector3(currentCollider.offset.x+0.3f, currentCollider.offset.y+0.3f, 0f);
 		playerBody.gravityScale = 0;*/
         //transform.position = Vector3.SmoothDamp(transform.position, currentStar.transform.position, ref velocity, 0.03f);
-		//playerScript.transform.position = Vector3.SmoothDamp(playerScript.transform.position, transform.position + colliderPosition, ref velocity, 0.03f);
-		if(version == 2)
-			colliderPosition = new Vector3(currentCollider.offset.x+0.1f + transform.position.x, currentCollider.offset.y+0.1f + transform.position.y, 0f);
-		else
-			colliderPosition = new Vector3(currentCollider.offset.x+0.3f+ transform.position.x, currentCollider.offset.y+0.3f+ transform.position.y, 0f);
-		playerScript.transform.position = colliderPosition;
+        //playerScript.transform.position = Vector3.SmoothDamp(playerScript.transform.position, transform.position + colliderPosition, ref velocity, 0.03f);
+	    if (playerScript.haveNotJumpSameStar)
+	    {
+	        if (version == 2)
+	            colliderPosition = new Vector3(currentCollider.offset.x + 0.1f + transform.position.x, currentCollider.offset.y + 0.1f + transform.position.y, 0f);
+	        else
+	            colliderPosition = new Vector3(currentCollider.offset.x + 0.3f + transform.position.x, currentCollider.offset.y + 0.3f + transform.position.y, 0f);
+	        playerScript.transform.position = colliderPosition;
+        }
+
 	}
 
 	private void OnTriggerExit2D(Collider2D other)
@@ -162,7 +166,8 @@ public class CometScript : MonoBehaviour
 
 	void CheckFrozen()
 	{
-		if(onComet)
+        //PlayerMovement script, making sure that the player haveNotJumpSameStar and be frozen while staying in the comet
+		if(onComet && playerScript.haveNotJumpSameStar)
 		{
 			if(Time.time > frozenStartTime && Time.time < frozenEndTime )
 			{
