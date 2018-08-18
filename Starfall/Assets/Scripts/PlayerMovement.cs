@@ -236,7 +236,7 @@ public class PlayerMovement : MonoBehaviour
 		// if riding a star, move player position with it
 		//if(onStar)
 		//	MoveTowardCenter();
-		if(onStar && haveNotJumpSameStar)
+		if(onStar && haveNotJumpSameStar && gameObject.GetComponent<PlayerPickUp>().shieldBool == false)
 		{
 			MoveWithStar();
 			playerBody.gravityScale = 0;

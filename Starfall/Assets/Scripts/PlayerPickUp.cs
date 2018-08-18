@@ -17,9 +17,9 @@ public class PlayerPickUp : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(shieldTime);
         if (shieldTime <= 0)
 	    {
+            //Located in MeteorScript and CometScript and PlayerMovement for phasethrough star is shieldBool is true, in the function similar as "MoveWithStar"
 	        shieldBool = false;
 	        //gameObject.GetComponent<PlayerMovement>() = true;
 	    }
@@ -42,7 +42,7 @@ public class PlayerPickUp : MonoBehaviour
             //Effects of a powerup
             Debug.Log("Shield Power Up");
             shieldBool = true;
-            Debug.Log(shieldBool);
+            Destroy(other.gameObject);
         }
 
         if (other.gameObject.CompareTag("Power Up Fuel"))
