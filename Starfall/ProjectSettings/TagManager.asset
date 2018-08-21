@@ -37,8 +37,7 @@ TagManager:
   - SFX Player
   - Power Up Shield
   - Power Up Fuel
-  - Power Up Wormhole1
-  - Power Up Wormhole2
+  - Power Up Wormhole
   layers:
   - Default
   - TransparentFX
