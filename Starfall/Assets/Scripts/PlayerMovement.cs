@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour 
@@ -49,6 +48,10 @@ public class PlayerMovement : MonoBehaviour
 	public bool onMeteor;
 	public GameObject mainCamera;
 	public AudioSource bgPlayer;
+    public bool haveNotJumpSameStar = true;
+    public bool AlternateMovement;
+    public float speedOnStar = 0.1f;
+    private float speedSave;
 	//public AudioClip explosionSound;
 
 
@@ -60,12 +63,11 @@ public class PlayerMovement : MonoBehaviour
 		player = GameObject.FindWithTag("Player");
 		playerBody = player.GetComponent<Rigidbody2D>();
 		playerRenderer = player.GetComponent<SpriteRenderer>();
-		myAnim = player.GetComponent<Animator>();
+        //Keeping storage of gameObject "star"
+        //Need to get script from star "SingleJumpFromStar"
+        myAnim = player.GetComponent<Animator>();
 		levelStartPos = GameObject.FindWithTag("Startpoint").transform.position.x;
-		if (SceneManager.GetActiveScene().name != "Endless") 
-        {
-            levelEndPos = GameObject.FindWithTag("Endpoint").transform.position.x;
-        }
+		levelEndPos = GameObject.FindWithTag("Endpoint").transform.position.x;
 		jumpsRemaining = maxJumps;
 		canMove = true;
 		timeLeft = gameDuration;
@@ -82,7 +84,9 @@ public class PlayerMovement : MonoBehaviour
 		jetPackParticles.Stop();
 		jetPackParticles.Clear();
 		gameplaySound = GameObject.FindWithTag("SFX Player").GetComponent<SoundEffectsScript>();
-	}
+        //To save the custom speed in inspector
+	    speedSave = speed;
+    }
 	
 	void FixedUpdate()
 	{
@@ -117,10 +121,24 @@ public class PlayerMovement : MonoBehaviour
 		transform.localScale = Scaler;
 	}
 
+    //When player enter trigger object
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.GetComponent<SingleJumpFromStar>().starJumpable || other.gameObject.GetComponent<CometSingleJump>().cometJumpable || other.gameObject.GetComponent<MeteorSingleJump>().meteorJumpable)
+        {
+            haveNotJumpSameStar = true;
+        }
+        //To stop all movement upon entry
+        if (AlternateMovement)
+        {
+            playerBody.velocity = Vector3.zero;
+        }
+    }
+
 	private void OnTriggerStay2D(Collider2D other)
 	{
 		// set current star player is riding on
-		if(other.gameObject.CompareTag("Star"))
+		if(other.gameObject.CompareTag("Star") && haveNotJumpSameStar)
 			LandOnStar(other.gameObject);
 		/*if(other.gameObject.CompareTag("Comet"))
 			LandOnComet(other.gameObject);*/
@@ -142,14 +160,34 @@ public class PlayerMovement : MonoBehaviour
 			PlayerDies();
 	}
 
-	private void LandOnStar(GameObject star)
+    //Alternate movement bool
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (AlternateMovement && other.gameObject.tag == "Star")
+        {
+            playerBody.gravityScale = 0.5f;
+            gameplaySound.PlayJetpack();
+            jetPackParticles.Clear();
+            jetPackParticles.Play();
+            //Copy from Handle Input function
+            canLand = true;
+            onStar = false;
+            onComet = false;
+            onMeteor = false;
+            falling = false;
+            //Restore player speed
+            speed = speedSave;
+        }
+    }
+
+    private void LandOnStar(GameObject star)
 	{
 		if(canLand && !onStar)
 		{
 			currentStar = star;
 			onStar = true;
 			RefillFuel();
-			HandleMovements();
+            HandleMovements();
 		}
 	}
 	// move player position with star position
@@ -160,10 +198,25 @@ public class PlayerMovement : MonoBehaviour
 		//if(movingToCenter == false)
 		playerBody.gravityScale = 0;
 		Vector3 colliderPosition;
-		CircleCollider2D currentCollider;
-		currentCollider = currentStar.GetComponent<CircleCollider2D>();
-		colliderPosition = new Vector3(currentCollider.offset.x + currentStar.transform.position.x, currentCollider.offset.y + currentStar.transform.position.y, 0f);
-		transform.position = colliderPosition;
+        CircleCollider2D currentCollider;
+	    currentCollider = currentStar.GetComponent<CircleCollider2D>();
+        //Only if desire "platform star" then alternate movement be true
+        if (AlternateMovement == false)
+	    {
+	        colliderPosition = new Vector3(currentCollider.offset.x + currentStar.transform.position.x, currentCollider.offset.y + currentStar.transform.position.y, 0f);
+	        transform.position = colliderPosition;
+        }
+        else if (AlternateMovement)
+        {
+            //colliderPosition = new Vector3(transform.position.x, currentCollider.offset.y + currentStar.transform.position.y, 0f);
+            colliderPosition = new Vector3(transform.position.x, transform.position.y, 0f);
+            transform.position = colliderPosition;
+            speed = speedOnStar;
+        }
+        else
+        {
+            Debug.Log("You should not be seeing this, Alternate Movement bool need attention; in MoveWithStar function");
+        }
 	}
 
 	private void MoveTowardCenter()
@@ -183,18 +236,18 @@ public class PlayerMovement : MonoBehaviour
 		// if riding a star, move player position with it
 		//if(onStar)
 		//	MoveTowardCenter();
-		if(onStar)
+		if(onStar && haveNotJumpSameStar)
 		{
 			MoveWithStar();
 			playerBody.gravityScale = 0;
 			//MoveTowardCenter();
 		}
-		/*if(onComet)
+        /*if(onComet)
 		{
 			playerBody.gravityScale = 0;
 			MoveTowardCenterOfComet();
 		}*/
-	}
+    }
 
 	private void HandleInput()
 	{
@@ -213,7 +266,9 @@ public class PlayerMovement : MonoBehaviour
 				playerBody.velocity = Vector2.up * jumpForce;
 				jumpsRemaining--;
 				falling = false;
-			}
+                //Restore movement to the player when jump from star after velocity.zero in void OnTriggerEnter2D
+			    speed = speedSave;
+            }
 			else if(Input.GetKeyUp(KeyCode.Space))
 			{
 				jetPackParticles.Stop();
@@ -249,7 +304,7 @@ public class PlayerMovement : MonoBehaviour
 
 	public void FreezePlayer()
 	{
-		print("Player Froze");
+		//print("Player Froze");
 		
 		if(!isFrozen)
 		{
