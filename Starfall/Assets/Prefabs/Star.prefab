@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 58012877802067452}
   - component: {fileID: 50651707371717628}
   - component: {fileID: 95287542576395634}
+  - component: {fileID: 114648395906685216}
   m_Layer: 8
   m_Name: Star
   m_TagString: Star
@@ -96,7 +97,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114246350792675168
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -111,14 +111,21 @@ MonoBehaviour:
   movementSpeed: 2
   topLeft: {x: -1.5, y: 7, z: 0}
   bottomRight: {x: 19.5, y: -5, z: 0}
-  purpleStar: {fileID: 21300000, guid: d0113bbf8d3803c45865914a0c5004c4, type: 3}
-  pinkStar: {fileID: 21300000, guid: 61914e2312002f249b192e1aaf684612, type: 3}
-  whiteStar: {fileID: 21300000, guid: d3c964d528d529944ba4d61be50d0cfd, type: 3}
-  starRenderer: {fileID: 212729257857752334}
   playerBody: {fileID: 0}
-  purpleAnimator: {fileID: 0}
-  pinkAnimator: {fileID: 0}
-  whiteAnimator: {fileID: 0}
+--- !u!114 &114648395906685216
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1844278647492636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ac63818c398bdc45a143c126b1d7b05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  starSingleJump: 1
+  starJumpable: 0
+  player: {fileID: 0}
 --- !u!212 &212729257857752334
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -132,7 +139,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
