@@ -6,7 +6,6 @@ public class MeteorScript : MonoBehaviour
 {
 	public GameObject player;
 	public PlayerMovement playerScript;
-    public PlayerPickUp playerPowerScript;
 	private float landingTime;
 	public float timeLimit = 3.0f;
 	public bool onMeteor = false;
@@ -19,7 +18,6 @@ public class MeteorScript : MonoBehaviour
 	{
 		player = GameObject.FindGameObjectWithTag("Player");
 		playerScript = player.GetComponent<PlayerMovement>();
-	    playerPowerScript = player.GetComponent<PlayerPickUp>();
 		playerBody = player.GetComponent<Rigidbody2D>();
 	}
 	
@@ -44,14 +42,14 @@ public class MeteorScript : MonoBehaviour
 		CircleCollider2D currentCollider;
 		currentCollider = gameObject.GetComponent<CircleCollider2D>();
 		//if(version == 2)
-		colliderPosition = new Vector3(currentCollider.offset.x+0.3f, currentCollider.offset.y+0.5f, 0f);
+			colliderPosition = new Vector3(currentCollider.offset.x+0.3f, currentCollider.offset.y+0.5f, 0f);
 		//else
 		//	colliderPosition = new Vector3(currentCollider.offset.x+0.3f, currentCollider.offset.y+0.3f, 0f);
-		//playerBody.gravityScale = 0;
+		playerBody.gravityScale = 0;
         //transform.position = Vector3.SmoothDamp(transform.position, currentStar.transform.position, ref velocity, 0.03f);
-		if(playerScript.playerLiving && playerScript.haveNotJumpSameStar && playerPowerScript.shieldBool == false)
+		if(playerScript.playerLiving)
 			playerScript.transform.position = Vector3.SmoothDamp(playerScript.transform.position, transform.position + colliderPosition, ref velocity, 0.03f);
-		if(!playerScript.playerLiving && playerScript.haveNotJumpSameStar && playerPowerScript.shieldBool == false)
+		if(!playerScript.playerLiving)
 		{
 			playerBody.constraints = RigidbodyConstraints2D.FreezeRotation;
 			playerScript.transform.position = Vector3.SmoothDamp(playerScript.transform.position, transform.position + colliderPosition, ref velocity, 0.03f);

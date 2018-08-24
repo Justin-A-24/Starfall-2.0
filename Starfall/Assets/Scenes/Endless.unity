@@ -6425,17 +6425,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!1 &111550688 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1261616146494826, guid: 7a7d9a2cf22098e4b96d614b9e5d5529,
-    type: 2}
-  m_PrefabInternal: {fileID: 1466017706}
---- !u!114 &111550693 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114971042692835258, guid: 7a7d9a2cf22098e4b96d614b9e5d5529,
-    type: 2}
-  m_PrefabInternal: {fileID: 1466017706}
-  m_Script: {fileID: 11500000, guid: ea5ae94d0651f0749a7f7a970ba30f90, type: 3}
 --- !u!1 &121231898
 GameObject:
   m_ObjectHideFlags: 0
@@ -6818,6 +6807,11 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &155770480 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1162051906048178, guid: e3ce8b7eccd99394db946e0c98933061,
+    type: 2}
+  m_PrefabInternal: {fileID: 392059870}
 --- !u!1 &163591478
 GameObject:
   m_ObjectHideFlags: 0
@@ -7311,12 +7305,12 @@ Prefab:
         type: 2}
       propertyPath: player
       value: 
-      objectReference: {fileID: 111550688}
+      objectReference: {fileID: 0}
     - target: {fileID: 114709360867569326, guid: 6e9c85e70d514d94bbcc661f2acea65b,
         type: 2}
       propertyPath: playerScript
       value: 
-      objectReference: {fileID: 111550693}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e9c85e70d514d94bbcc661f2acea65b, type: 2}
   m_IsPrefabParent: 0
@@ -28070,6 +28064,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e3ce8b7eccd99394db946e0c98933061, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &405990537 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1862951650030406, guid: ddb4f16d0d1f167449b5384994d94362,
+    type: 2}
+  m_PrefabInternal: {fileID: 246004108}
 --- !u!1 &413180916
 GameObject:
   m_ObjectHideFlags: 0
@@ -34375,11 +34374,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!4 &545765661 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4630640380276566, guid: 7a7d9a2cf22098e4b96d614b9e5d5529,
-    type: 2}
-  m_PrefabInternal: {fileID: 1466017706}
 --- !u!1 &554198182
 GameObject:
   m_ObjectHideFlags: 0
@@ -91301,6 +91295,34 @@ Prefab:
       value: 
       objectReference: {fileID: 1445418554386438, guid: 2c2379be3fdce17458d10c2b4b6c9a9d,
         type: 2}
+    - target: {fileID: 114098852209770630, guid: 7a7d9a2cf22098e4b96d614b9e5d5529,
+        type: 2}
+      propertyPath: pausePanel
+      value: 
+      objectReference: {fileID: 405990537}
+    - target: {fileID: 114098852209770630, guid: 7a7d9a2cf22098e4b96d614b9e5d5529,
+        type: 2}
+      propertyPath: diedMenu
+      value: 
+      objectReference: {fileID: 155770480}
+    - target: {fileID: 114098852209770630, guid: 7a7d9a2cf22098e4b96d614b9e5d5529,
+        type: 2}
+      propertyPath: jetPackParticles
+      value: 
+      objectReference: {fileID: 198321560017527566, guid: 89956e675b749204c8e10395ce2b5fb9,
+        type: 2}
+    - target: {fileID: 4563325058363508, guid: 7a7d9a2cf22098e4b96d614b9e5d5529, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4563325058363508, guid: 7a7d9a2cf22098e4b96d614b9e5d5529, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 199.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4563325058363508, guid: 7a7d9a2cf22098e4b96d614b9e5d5529, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -208.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a7d9a2cf22098e4b96d614b9e5d5529, type: 2}
   m_IsPrefabParent: 0
@@ -96760,6 +96782,11 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!4 &1568201914 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4563325058363508, guid: 7a7d9a2cf22098e4b96d614b9e5d5529,
+    type: 2}
+  m_PrefabInternal: {fileID: 1466017706}
 --- !u!1 &1570817574
 GameObject:
   m_ObjectHideFlags: 0
@@ -108901,7 +108928,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 797727450}
-  - {fileID: 545765661}
+  - {fileID: 1568201914}
   - {fileID: 290055320}
   - {fileID: 1242425036}
   - {fileID: 1710509139}
