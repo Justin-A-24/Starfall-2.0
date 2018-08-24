@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
 	public GameObject currentStar;
 	public Rigidbody2D playerBody;
 	public SpriteRenderer playerRenderer;
+    //script for the power up player
+    public PlayerPickUp playerPickUpScript;
 	public Sprite deathSprite;
 	public Sprite frozenSprite;
 	public Sprite idleSprite;
@@ -63,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
 		player = GameObject.FindWithTag("Player");
 		playerBody = player.GetComponent<Rigidbody2D>();
 		playerRenderer = player.GetComponent<SpriteRenderer>();
+	    playerPickUpScript = player.GetComponent<PlayerPickUp>();
         //Keeping storage of gameObject "star"
         //Need to get script from star "SingleJumpFromStar"
         myAnim = player.GetComponent<Animator>();
@@ -124,7 +127,10 @@ public class PlayerMovement : MonoBehaviour
     //When player enter trigger object
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<SingleJumpFromStar>().starJumpable || other.gameObject.GetComponent<CometSingleJump>().cometJumpable || other.gameObject.GetComponent<MeteorSingleJump>().meteorJumpable)
+        //This if statement give out error message but it is working as expected, let me know if the method is not right and how it can be improve if possible for KingdomCross (Alex Chheng)
+        if (other.gameObject.GetComponent<SingleJumpFromStar>().starJumpable ||
+            other.gameObject.GetComponent<CometSingleJump>().cometJumpable ||
+            other.gameObject.GetComponent<MeteorSingleJump>().meteorJumpable)
         {
             haveNotJumpSameStar = true;
         }
@@ -201,6 +207,7 @@ public class PlayerMovement : MonoBehaviour
         CircleCollider2D currentCollider;
 	    currentCollider = currentStar.GetComponent<CircleCollider2D>();
         //Only if desire "platform star" then alternate movement be true
+        //New update: AlternateMovement are abandom and should not be turn on, it is left here in case ever want to retry the "Platform star" task, if retry ask KingdomCross (Alex Chheng) for info and he'll try to help if possible
         if (AlternateMovement == false)
 	    {
 	        colliderPosition = new Vector3(currentCollider.offset.x + currentStar.transform.position.x, currentCollider.offset.y + currentStar.transform.position.y, 0f);
@@ -236,7 +243,7 @@ public class PlayerMovement : MonoBehaviour
 		// if riding a star, move player position with it
 		//if(onStar)
 		//	MoveTowardCenter();
-		if(onStar && haveNotJumpSameStar)
+		if(onStar && haveNotJumpSameStar && gameObject.GetComponent<PlayerPickUp>().shieldBool == false)
 		{
 			MoveWithStar();
 			playerBody.gravityScale = 0;
@@ -263,6 +270,8 @@ public class PlayerMovement : MonoBehaviour
 				onStar = false;
 				onComet = false;
 				onMeteor = false;
+                //PlayerPickUp scripts for the wormhole
+			    playerPickUpScript.onWormhole = false;
 				playerBody.velocity = Vector2.up * jumpForce;
 				jumpsRemaining--;
 				falling = false;
