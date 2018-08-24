@@ -8,15 +8,15 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications: []
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 0}
+  m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1040212038055142}
-  m_IsPrefabAsset: 1
+  m_IsPrefabParent: 1
 --- !u!1 &1040212038055142
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
+  serializedVersion: 5
   m_Component:
   - component: {fileID: 4407346609479938}
   - component: {fileID: 212174043353447374}
@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 50068143521881750}
   - component: {fileID: 114626246845469232}
   - component: {fileID: 251068978590813480}
-  - component: {fileID: 114848917446051160}
   m_Layer: 8
   m_Name: Meteor
   m_TagString: Meteor
@@ -35,7 +34,7 @@ GameObject:
 --- !u!4 &4407346609479938
 Transform:
   m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1040212038055142}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
@@ -49,7 +48,7 @@ Transform:
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1040212038055142}
   m_BodyType: 0
@@ -68,7 +67,7 @@ Rigidbody2D:
 --- !u!61 &61991063480239314
 BoxCollider2D:
   m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1040212038055142}
   m_Enabled: 1
@@ -93,7 +92,7 @@ BoxCollider2D:
 --- !u!114 &114626246845469232
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1040212038055142}
   m_Enabled: 1
@@ -105,26 +104,10 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   timeLimit: 3
   onMeteor: 0
-  timeSet: 0
-  playerBody: {fileID: 0}
---- !u!114 &114848917446051160
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1040212038055142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f6e505e2488c1b4aa04db9a24d1c213, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meteorSingleJump: 1
-  meteorJumpable: 0
-  player: {fileID: 0}
 --- !u!212 &212174043353447374
 SpriteRenderer:
   m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1040212038055142}
   m_Enabled: 1
@@ -166,11 +149,10 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!251 &251068978590813480
 PlatformEffector2D:
   m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1040212038055142}
   m_Enabled: 1

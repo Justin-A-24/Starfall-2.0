@@ -8,15 +8,15 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications: []
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 0}
+  m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1527902095015694}
-  m_IsPrefabAsset: 1
+  m_IsPrefabParent: 1
 --- !u!1 &1527902095015694
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
+  serializedVersion: 5
   m_Component:
   - component: {fileID: 4287659628408678}
   - component: {fileID: 212471601264238430}
@@ -25,7 +25,6 @@ GameObject:
   - component: {fileID: 50257956274814894}
   - component: {fileID: 251984912215514386}
   - component: {fileID: 95395935266609472}
-  - component: {fileID: 114191714231141612}
   m_Layer: 8
   m_Name: Comet
   m_TagString: Comet
@@ -36,7 +35,7 @@ GameObject:
 --- !u!4 &4287659628408678
 Transform:
   m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1527902095015694}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
@@ -50,7 +49,7 @@ Transform:
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1527902095015694}
   m_BodyType: 0
@@ -69,7 +68,7 @@ Rigidbody2D:
 --- !u!61 &61618389083971228
 BoxCollider2D:
   m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1527902095015694}
   m_Enabled: 1
@@ -95,7 +94,7 @@ BoxCollider2D:
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1527902095015694}
   m_Enabled: 1
@@ -109,24 +108,10 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114191714231141612
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1527902095015694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc345afc2d5ef884fa8d22eac6d8e1f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cometSingleJump: 1
-  cometJumpable: 0
-  player: {fileID: 0}
 --- !u!114 &114640011631770562
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1527902095015694}
   m_Enabled: 1
@@ -144,13 +129,10 @@ MonoBehaviour:
   frozenEndTime: 0
   frozen: 0
   timerOn: 0
-  playerBody: {fileID: 0}
-  timeSet: 0
-  version: 0
 --- !u!212 &212471601264238430
 SpriteRenderer:
   m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1527902095015694}
   m_Enabled: 1
@@ -192,11 +174,10 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!251 &251984912215514386
 PlatformEffector2D:
   m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1527902095015694}
   m_Enabled: 1
