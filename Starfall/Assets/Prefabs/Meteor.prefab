@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 50068143521881750}
   - component: {fileID: 114626246845469232}
   - component: {fileID: 251068978590813480}
+  - component: {fileID: 114491808129519886}
   m_Layer: 8
   m_Name: Meteor
   m_TagString: Meteor
@@ -89,6 +90,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6.905032, y: 0.6092751}
   m_EdgeRadius: 0
+--- !u!114 &114491808129519886
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1040212038055142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f6e505e2488c1b4aa04db9a24d1c213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meteorSingleJump: 1
+  meteorJumpable: 0
+  player: {fileID: 0}
 --- !u!114 &114626246845469232
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -104,6 +119,8 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   timeLimit: 3
   onMeteor: 0
+  timeSet: 0
+  playerBody: {fileID: 0}
 --- !u!212 &212174043353447374
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -117,7 +134,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:

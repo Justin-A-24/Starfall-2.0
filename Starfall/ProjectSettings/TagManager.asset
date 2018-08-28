@@ -35,6 +35,9 @@ TagManager:
   - Fader
   - Death Sound
   - SFX Player
+  - Power Up Shield
+  - Power Up Fuel
+  - Power Up Wormhole
   layers:
   - Default
   - TransparentFX
