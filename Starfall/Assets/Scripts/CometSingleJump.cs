@@ -5,9 +5,10 @@ using UnityEngine;
 public class CometSingleJump : MonoBehaviour
 {
     //For get component to the player jump ability
-    public bool cometSingleJump = true;
     public bool cometJumpable;
     public GameObject player;
+    public CometScript CometScript;
+    public PlayerMovement playerScript;
 
     // Use this for initialization
     void Start()
@@ -15,6 +16,8 @@ public class CometSingleJump : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         player.GetComponent<PlayerMovement>();
         cometJumpable = true;
+        CometScript = gameObject.GetComponent<CometScript>();
+        playerScript = gameObject.GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -25,7 +28,7 @@ public class CometSingleJump : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (cometSingleJump && other.gameObject.tag == "Player" && cometJumpable)
+        if (other.gameObject.tag == "Player" && cometJumpable)
         {
             other.gameObject.GetComponent<PlayerMovement>().haveNotJumpSameStar = true;
         }
@@ -33,7 +36,7 @@ public class CometSingleJump : MonoBehaviour
 
     public void OnTriggerStay2D(Collider2D other)
     {
-        if (cometSingleJump && other.gameObject.tag == "Player" && Input.GetKeyDown(KeyCode.Space) && cometJumpable && player.GetComponent<PlayerMovement>().jumpsRemaining > 0)
+        if (other.gameObject.tag == "Player" && Input.GetKeyDown(KeyCode.Space) && cometJumpable && player.GetComponent<PlayerMovement>().jumpsRemaining > 0 && CometScript.frozen == false)
         {
             cometJumpable = false;
             other.gameObject.GetComponent<PlayerMovement>().haveNotJumpSameStar = false;
