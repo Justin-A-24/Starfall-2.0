@@ -18,9 +18,9 @@ public class PowerUpWormhole : MonoBehaviour
 		
 	}
 
-    void OnTriggerExit2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && Input.GetKeyUp(KeyCode.Space))
         {
             wormholeJumpable = false;
         }
