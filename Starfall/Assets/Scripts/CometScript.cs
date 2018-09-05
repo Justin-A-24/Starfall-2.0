@@ -19,9 +19,10 @@ public class CometScript : MonoBehaviour
 	public Rigidbody2D playerBody;
 	public bool timeSet;
 	public int version;
+    public CometSingleJump CometSingleJumpScript;
 
-	// Use this for initialization
-	void Start () 
+    // Use this for initialization
+    void Start () 
 	{
 		player = GameObject.FindGameObjectWithTag("Player");
 		playerScript = player.GetComponent<PlayerMovement>();
@@ -29,6 +30,7 @@ public class CometScript : MonoBehaviour
 		version = transform.GetComponent<CometMovements>().cometVersion;
 		frozen = false;
 		timeLimit = 1.5f;
+	    CometSingleJumpScript = gameObject.GetComponent<CometSingleJump>();
 	}
 	
 	// Update is called once per frame
@@ -47,7 +49,7 @@ public class CometScript : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D other)
 	{
-		if(other.gameObject.CompareTag("Player"))
+		if(other.gameObject.CompareTag("Player") && CometSingleJumpScript.cometJumpable)
 		{
 			print("collision");
 			onComet = true;
@@ -58,7 +60,7 @@ public class CometScript : MonoBehaviour
 
 	private void OnTriggerStay2D(Collider2D other)
 	{
-		if(other.gameObject.CompareTag("Player"))
+		if(other.gameObject.CompareTag("Player") && CometSingleJumpScript.cometJumpable)
 		{
 			if(!timeSet)
 			{
@@ -95,11 +97,14 @@ public class CometScript : MonoBehaviour
 		playerBody.gravityScale = 0;*/
         //transform.position = Vector3.SmoothDamp(transform.position, currentStar.transform.position, ref velocity, 0.03f);
 		//playerScript.transform.position = Vector3.SmoothDamp(playerScript.transform.position, transform.position + colliderPosition, ref velocity, 0.03f);
-		if(version == 2)
-			colliderPosition = new Vector3(currentCollider.offset.x+0.1f + transform.position.x, currentCollider.offset.y+0.1f + transform.position.y, 0f);
-		else
-			colliderPosition = new Vector3(currentCollider.offset.x+0.3f+ transform.position.x, currentCollider.offset.y+0.3f+ transform.position.y, 0f);
-		playerScript.transform.position = colliderPosition;
+        if (CometSingleJumpScript.cometJumpable)
+	    {
+	        if (version == 2)
+	            colliderPosition = new Vector3(currentCollider.offset.x + 0.1f + transform.position.x, currentCollider.offset.y + 0.1f + transform.position.y, 0f);
+	        else
+	            colliderPosition = new Vector3(currentCollider.offset.x + 0.3f + transform.position.x, currentCollider.offset.y + 0.3f + transform.position.y, 0f);
+	        playerScript.transform.position = colliderPosition;
+        }
 	}
 
 	private void OnTriggerExit2D(Collider2D other)
@@ -108,7 +113,7 @@ public class CometScript : MonoBehaviour
 		playerScript.onComet = false;
 		timeSet = false;
 		playerBody.gravityScale = 0.5f;
-	}
+    }
 
 	private void OnCollisionExit2D(Collision2D other)
 	{
@@ -164,12 +169,12 @@ public class CometScript : MonoBehaviour
 	{
 		if(onComet)
 		{
-			if(Time.time > frozenStartTime && Time.time < frozenEndTime )
+			if(Time.time > frozenStartTime && Time.time < frozenEndTime)
 			{
 				//print(Time.time);
 				frozen = true;
 			}
-			else			
+			else
 			{
 				frozen = false;
 				//StartCometTimer();

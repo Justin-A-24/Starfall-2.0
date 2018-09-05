@@ -5,7 +5,6 @@ using UnityEngine;
 public class SingleJumpFromStar : MonoBehaviour
 {
     //For get component to the player jump ability
-    public bool starSingleJump = true;
     public bool starJumpable;
     public GameObject player;
 
@@ -23,7 +22,7 @@ public class SingleJumpFromStar : MonoBehaviour
 	}
     public void OnTriggerStay2D(Collider2D other)
     {
-        if (starSingleJump && other.gameObject.tag == "Player" && Input.GetKeyDown(KeyCode.Space) && starJumpable)
+        if (other.gameObject.tag == "Player" && Input.GetKeyDown(KeyCode.Space) && starJumpable)
         {
             starJumpable = false;
             other.gameObject.GetComponent<PlayerMovement>().haveNotJumpSameStar = false;

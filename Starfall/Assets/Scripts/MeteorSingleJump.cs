@@ -5,7 +5,6 @@ using UnityEngine;
 public class MeteorSingleJump : MonoBehaviour
 {
     //For get component to the player jump ability
-    public bool meteorSingleJump = true;
     public bool meteorJumpable;
     public GameObject player;
 
@@ -25,7 +24,7 @@ public class MeteorSingleJump : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (meteorSingleJump && other.gameObject.tag == "Player" && meteorJumpable)
+        if (other.gameObject.tag == "Player" && meteorJumpable)
         {
             other.gameObject.GetComponent<PlayerMovement>().haveNotJumpSameStar = true;
         }
@@ -33,7 +32,7 @@ public class MeteorSingleJump : MonoBehaviour
 
     public void OnTriggerStay2D(Collider2D other)
     {
-        if (meteorSingleJump && other.gameObject.tag == "Player" && Input.GetKeyDown(KeyCode.Space) && meteorJumpable && player.GetComponent<PlayerMovement>().jumpsRemaining > 0)
+        if (other.gameObject.tag == "Player" && Input.GetKeyDown(KeyCode.Space) && meteorJumpable && player.GetComponent<PlayerMovement>().jumpsRemaining > 0)
         {
             meteorJumpable = false;
             other.gameObject.GetComponent<PlayerMovement>().haveNotJumpSameStar = false;

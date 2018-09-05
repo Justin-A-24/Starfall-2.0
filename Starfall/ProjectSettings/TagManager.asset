@@ -38,6 +38,7 @@ TagManager:
   - Power Up Shield
   - Power Up Fuel
   - Power Up Wormhole
+  - Power Up Parent
   layers:
   - Default
   - TransparentFX

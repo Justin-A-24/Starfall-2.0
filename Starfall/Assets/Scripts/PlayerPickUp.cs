@@ -58,7 +58,6 @@ public class PlayerPickUp : MonoBehaviour
             Destroy(other.gameObject);
         }
 
-        //This if statement give out error message but it is working as expected, let me know if the method is not right and how it can be improve if possible for KingdomCross (Alex Chheng)
         if (other.gameObject.CompareTag("Power Up Wormhole") && other.gameObject.GetComponent<PowerUpWormhole>().wormholeJumpable)
         {
             //Effects of a powerup
@@ -78,7 +77,11 @@ public class PlayerPickUp : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-
+        if (onWormhole && Input.GetKeyUp(KeyCode.Space))
+        {
+            onWormhole = false;
+            playerBody.gravityScale = 0.5f;
+        }
     }
 
     void PowerUpShield()

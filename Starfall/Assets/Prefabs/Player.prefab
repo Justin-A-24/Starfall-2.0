@@ -723,7 +723,6 @@ MonoBehaviour:
   currentStar: {fileID: 0}
   playerBody: {fileID: 0}
   playerRenderer: {fileID: 0}
-  playerPickUpScript: {fileID: 0}
   deathSprite: {fileID: 21300000, guid: 0a0537666514ffc4aa02a4cdf65d5caf, type: 3}
   frozenSprite: {fileID: 21300000, guid: 203a29b81a0be234ab7448dc274ca11a, type: 3}
   idleSprite: {fileID: 21300000, guid: 9c16cbe0ff95c5c40978fb0c609be31e, type: 3}
@@ -798,7 +797,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wormholeDistance: 5
-  shieldTime: 10
+  shieldTime: 5
   shieldBool: 0
   onWormhole: 0
   player: {fileID: 0}

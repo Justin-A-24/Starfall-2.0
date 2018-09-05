@@ -11,6 +11,7 @@ public class MeteorScript : MonoBehaviour
 	public bool onMeteor = false;
 	public bool timeSet;
 	public Rigidbody2D playerBody;
+    public MeteorSingleJump MeteorSingleJumpScript;
 	private Vector3 velocity = Vector3.zero;
 
 	// Use this for initialization
@@ -19,6 +20,7 @@ public class MeteorScript : MonoBehaviour
 		player = GameObject.FindGameObjectWithTag("Player");
 		playerScript = player.GetComponent<PlayerMovement>();
 		playerBody = player.GetComponent<Rigidbody2D>();
+	    MeteorSingleJumpScript = gameObject.GetComponent<MeteorSingleJump>();
 	}
 	
 	// Update is called once per frame
@@ -42,14 +44,14 @@ public class MeteorScript : MonoBehaviour
 		CircleCollider2D currentCollider;
 		currentCollider = gameObject.GetComponent<CircleCollider2D>();
 		//if(version == 2)
-			colliderPosition = new Vector3(currentCollider.offset.x+0.3f, currentCollider.offset.y+0.5f, 0f);
+		colliderPosition = new Vector3(currentCollider.offset.x+0.3f, currentCollider.offset.y+0.5f, 0f);
 		//else
 		//	colliderPosition = new Vector3(currentCollider.offset.x+0.3f, currentCollider.offset.y+0.3f, 0f);
 		playerBody.gravityScale = 0;
         //transform.position = Vector3.SmoothDamp(transform.position, currentStar.transform.position, ref velocity, 0.03f);
-		if(playerScript.playerLiving)
+		if(playerScript.playerLiving && MeteorSingleJumpScript.meteorJumpable)
 			playerScript.transform.position = Vector3.SmoothDamp(playerScript.transform.position, transform.position + colliderPosition, ref velocity, 0.03f);
-		if(!playerScript.playerLiving)
+		if(!playerScript.playerLiving && MeteorSingleJumpScript.meteorJumpable)
 		{
 			playerBody.constraints = RigidbodyConstraints2D.FreezeRotation;
 			playerScript.transform.position = Vector3.SmoothDamp(playerScript.transform.position, transform.position + colliderPosition, ref velocity, 0.03f);
@@ -66,7 +68,7 @@ public class MeteorScript : MonoBehaviour
 
 	private void OnTriggerStay2D(Collider2D other)
 	{
-		if(other.gameObject.CompareTag("Player"))
+		if(other.gameObject.CompareTag("Player") && MeteorSingleJumpScript.meteorJumpable)
 		{
 			if(!timeSet)
 			{
